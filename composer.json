@@ -1,0 +1,18 @@
+{
+    "name":"lazarini/frete",
+    "description": "Este pacote tem o foco de facilitar a integração com o web service dos correios.",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "authors": [{
+        "name": "Bruno lazarini Bezerra",
+        "email": "brunolazarini935@gmail.com"
+    }],
+    "autoload": {
+        "psr-4":{
+            "Lazarini\\CorreiosFrete\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0"
+    }
+}
