@@ -2,6 +2,13 @@
 
 SIMPLES INTEGRAÇÃO COM WEBSERVICE DOS CORREIOS
 
+## INSTALAÇÃO
+
+```shell
+composer require lazarini/frete
+````
+
+
 ## UTILIZAÇÃO
 
 PARA USAR ESTE PACOTE BASTA SERGUIR O EXEMPLO A BAIXO
