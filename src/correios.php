@@ -6,8 +6,6 @@ class CORREIOS
 {
     const SEDEX = '04014';
     const PAC   = '04510';
-    const SEDEX_10 = '04790';
-    const SEDEX_12 = '04782';
     const SEDEX_HOJE = '04804';
 
     const CAIXA = 1;
@@ -91,12 +89,22 @@ class CORREIOS
 
     public function calc()
     {
-        $x = $this->payload['nCdServico'];
-        print_r($x);
-        // $this->payload['StrRetorno'] = 'xml';
-        // $xml_string = file_get_contents('http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?' . http_build_query($this->payload));
-        // $xml = simplexml_load_string($xml_string);
-        // $json = json_encode($xml);
-        // return json_decode($json, TRUE);
+        $this->payload['StrRetorno'] = 'xml';
+        $servicos = $this->payload['nCdServico'];
+        $consultas = [];
+        foreach($servicos as $servico){
+            $this->payload['nCdServico'] = $servico;
+            $xml_string = file_get_contents('http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?' . http_build_query($this->payload));
+            $xml = simplexml_load_string($xml_string);
+            $json = json_encode($xml);
+            if($servico == CORREIOS::SEDEX){
+                $consultas['SEDEX'] = json_decode($json, TRUE);
+            }elseif($servico == CORREIOS::PAC){
+                $consultas['PAC'] = json_decode($json, TRUE);
+            }elseif($servico == CORREIOS::SEDEX_HOJE){
+                $consultas['SEDEX_HOJE'] = json_decode($json, TRUE);
+            }
+        }
+        return $consultas;
     }
 }
