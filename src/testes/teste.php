@@ -5,9 +5,8 @@ require '../../vendor/autoload.php';
 use Lazarini\CorreiosFrete\CORREIOS;
 
 $instance = new CORREIOS();
-
 $frete = $instance
-    ->service([CORREIOS::SEDEX, CORREIOS::PAC, CORREIOS::SEDEX_10])
+    ->service([CORREIOS::SEDEX, CORREIOS::PAC, CORREIOS::SEDEX_HOJE])
     ->origem('04474340')
     ->destino('01001000')
     ->formato(CORREIOS::CAIXA)
