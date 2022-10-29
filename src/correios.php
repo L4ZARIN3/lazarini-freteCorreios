@@ -48,13 +48,24 @@ class CORREIOS
         return $this;
     }
 
-    public function item($largura, $altura, $comprimento, $peso, $quantidade = 1)
+    public function item($largura, $altura, $comprimento, $peso, $quantidade)
     {
-        $this->items[] = compact('largura', 'altura', 'comprimento', 'peso', 'quantidade');
-        $this->payload['nVlLargura'] = $this->items[0]['largura'];
-        $this->payload['nVlAltura'] = $this->items[0]['altura'];
-        $this->payload['nVlComprimento'] = $this->items[0]['comprimento'];
-        $this->payload['nVlPeso'] = $this->items[0]['peso'];
+
+        $pesoTotal = $quantidade * $peso;
+
+        $cmCubicoTotal = $largura * $altura* $comprimento * $quantidade;
+
+        $raiz_cubica = round(pow($cmCubicoTotal, 1/3), 2);
+        
+        $largura = $raiz_cubica < 11 ? 11 : $raiz_cubica;
+        $altura = $raiz_cubica < 2 ? 2 : $raiz_cubica;
+        $comprimento =  $raiz_cubica < 16 ? 16 : $raiz_cubica;
+        $pesoFinal = $pesoTotal < 0.3 ? 0.3 : $pesoTotal;
+
+        $this->payload['nVlLargura'] = $largura;
+        $this->payload['nVlAltura'] = $altura;
+        $this->payload['nVlComprimento'] = $comprimento;
+        $this->payload['nVlPeso'] = $pesoFinal;
         $this->payload['nVlDiametro'] = 0;
         return $this;
     }
