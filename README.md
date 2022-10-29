@@ -23,6 +23,7 @@ use Lazarini\CorreiosFrete\CORREIOS;
 $instance = new CORREIOS();
 
 $frete = $instance
+    ->credenciais('teste', 'teste') // OPCIONAL
     ->service(CORREIOS::PAC) // OBRIGATORIO USE: CORREIOS::SEDEX, CORREIOS::PAC, CORREIOS::SEDEX_10
     ->origem('04474340') // OBRIGATORIO
     ->destino('06803440') // OBRIGATORIO

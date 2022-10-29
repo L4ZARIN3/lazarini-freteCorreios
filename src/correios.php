@@ -20,7 +20,6 @@ class CORREIOS
     {
         $this->payload['nCdEmpresa'] = $code;
         $this->payload['sDsSenha'] = $password;
-
         return $this;
     }
 
