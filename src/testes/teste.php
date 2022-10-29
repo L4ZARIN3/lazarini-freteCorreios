@@ -7,7 +7,7 @@ use Lazarini\CorreiosFrete\CORREIOS;
 $instance = new CORREIOS();
 
 $frete = $instance
-    ->service(CORREIOS::SEDEX)
+    ->service([CORREIOS::SEDEX, CORREIOS::PAC, CORREIOS::SEDEX_10])
     ->origem('04474340')
     ->destino('01001000')
     ->formato(CORREIOS::CAIXA)

@@ -6,7 +6,9 @@ class CORREIOS
 {
     const SEDEX = '04014';
     const PAC   = '04510';
-    const SEDEX_10 = '04510';
+    const SEDEX_10 = '04790';
+    const SEDEX_12 = '04782';
+    const SEDEX_HOJE = '04804';
 
     const CAIXA = 1;
     const ROLO = 2;
@@ -51,8 +53,8 @@ class CORREIOS
     {
 
         $pesoTotal = $quantidade * $peso;
-
-        $cmCubicoTotal = $largura * $altura* $comprimento * $quantidade;
+        
+        $cmCubicoTotal = $quantidade * $largura * $altura * $comprimento;
 
         $raiz_cubica = round(pow($cmCubicoTotal, 1/3), 2);
         
@@ -89,10 +91,12 @@ class CORREIOS
 
     public function calc()
     {
-        $this->payload['StrRetorno'] = 'xml';
-        $xml_string = file_get_contents('http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?' . http_build_query($this->payload));
-        $xml = simplexml_load_string($xml_string);
-        $json = json_encode($xml);
-        return json_decode($json, TRUE);
+        $x = $this->payload['nCdServico'];
+        print_r($x);
+        // $this->payload['StrRetorno'] = 'xml';
+        // $xml_string = file_get_contents('http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?' . http_build_query($this->payload));
+        // $xml = simplexml_load_string($xml_string);
+        // $json = json_encode($xml);
+        // return json_decode($json, TRUE);
     }
 }
