@@ -5,6 +5,11 @@ require '../../vendor/autoload.php';
 use Lazarini\CorreiosFrete\CORREIOS;
 
 $instance = new CORREIOS();
+
+$cep = $instance->cep('04474-340');
+
+print_r($cep);
+
 $frete = $instance
     ->service([CORREIOS::SEDEX, CORREIOS::PAC, CORREIOS::SEDEX_HOJE])
     ->origem('04474340')
