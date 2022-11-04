@@ -61,3 +61,19 @@ $frete = $instance
 
 print_r($frete);
 ```
+
+## CONSULTANDO CEP
+
+PARA CONSULTAR CEP SIGA O EXEMPLO A BAIXO
+
+```php
+<?php
+
+require __DIR__.'vendor/autoload';
+use Lazarini\CorreiosFrete\CORREIOS;
+
+$instance = new CORREIOS();
+$cep = $instance->cep('04474-340');
+
+print_r($cep);
+```

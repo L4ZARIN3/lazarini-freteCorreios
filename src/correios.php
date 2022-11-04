@@ -31,13 +31,13 @@ class CORREIOS
 
     public function origem($cep)
     {
-        $this->payload['sCepOrigem'] = preg_replace('/[^0-9]/', null, $cep);
+        $this->payload['sCepOrigem'] = preg_replace('/[^0-9]/', '', $cep);
         return $this;
     }
 
     public function destino($cep)
     {
-        $this->payload['sCepDestino'] = preg_replace('/[^0-9]/', null, $cep);
+        $this->payload['sCepDestino'] = preg_replace('/[^0-9]/', '', $cep);
         return $this;
     }
 
@@ -106,5 +106,18 @@ class CORREIOS
             }
         }
         return $consultas;
+    }
+
+    public function cep($cep){
+        $cep = preg_replace('/[^0-9]/', '', $cep);
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => "https://viacep.com.br/ws/$cep/json/",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_CUSTOMREQUEST => "GET",
+        ]);
+        return curl_exec($ch);
     }
 }
